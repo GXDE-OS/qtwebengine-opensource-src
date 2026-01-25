@@ -2169,6 +2169,7 @@ jumbo_static_library("browser") {
   if (!is_android) {
     deps += [
       "//components/vector_icons",
+      "//content/browser/tracing:resources",
     ]
   }
 
@@ -2212,10 +2213,6 @@ jumbo_static_library("browser") {
       "//services/video_capture/public/uma",
       "//third_party/webrtc_overrides:webrtc_component",
     ]
-
-    if (target_cpu == "mipsel") {
-      cflags = [ "--param=ggc-min-expand=20" ]
-    }
   }
 
   # Desktop/Window/WebContents screen capture implementations, conditionally

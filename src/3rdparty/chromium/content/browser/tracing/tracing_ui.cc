@@ -27,6 +27,7 @@
 #include "base/strings/stringprintf.h"
 #include "base/trace_event/trace_event.h"
 #include "base/values.h"
+#include "content/browser/tracing/grit/tracing_resources.h"
 #include "content/browser/tracing/tracing_controller_impl.h"
 #include "content/public/browser/browser_context.h"
 #include "content/public/browser/browser_thread.h"
@@ -241,6 +242,8 @@ TracingUI::TracingUI(WebUI* web_ui)
   WebUIDataSource* source = WebUIDataSource::Create(kChromeUITracingHost);
   source->DisableTrustedTypesCSP();
   source->UseStringsJs();
+  source->SetDefaultResource(IDR_TRACING_HTML);
+  source->AddResourcePath("tracing.js", IDR_TRACING_JS);
   source->SetRequestFilter(base::BindRepeating(OnShouldHandleRequest),
                            base::BindRepeating(OnTracingRequest));
   WebUIDataSource::Add(browser_context, source);

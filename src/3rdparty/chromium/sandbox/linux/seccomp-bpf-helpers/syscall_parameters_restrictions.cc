@@ -42,11 +42,7 @@
 // the one in Ubuntu 16.04 LTS) is missing PTRACE_GET_THREAD_AREA.
 // asm/ptrace-abi.h doesn't exist on arm32 and PTRACE_GET_THREAD_AREA isn't
 // defined on aarch64, so don't try to include this on those platforms.
-#if defined(__mips__)
-#include <asm/ptrace.h>
-#else
 #include <asm/ptrace-abi.h>
-#endif
 #endif
 #endif  // !OS_NACL_NONSFI
 

@@ -6,6 +6,23 @@ QTWEBENGINE_SOURCE_TREE = $$PWD
 
 equals(QMAKE_HOST.os, Windows): EXE_SUFFIX = .exe
 
+defineTest(isPythonVersionSupported) {
+    python = $$system_quote($$system_path($$1))
+    python_version = $$system('$$python -c "import sys; print(sys.version_info[0:3])"')
+    python_version ~= s/[()]//g
+    python_version = $$split(python_version, ',')
+    python_major_version = $$first(python_version)
+    greaterThan(python_major_version, 2) {
+        qtLog("Python version 3 is not supported by Chromium.")
+        return(false)
+    }
+    python_minor_version = $$member(python_version, 1)
+    python_patch_version = $$member(python_version, 2)
+    greaterThan(python_major_version, 1): greaterThan(python_minor_version, 6): greaterThan(python_patch_version, 4): return(true)
+    qtLog("Unsupported python version: $${python_major_version}.$${python_minor_version}.$${python_patch_version}.")
+    return(false)
+}
+
 defineTest(qtConfTest_detectJumboBuild) {
     mergeLimit = $$eval(config.input.merge_limit)
     mergeLimit = $$find(mergeLimit, "\\d")
@@ -35,18 +52,22 @@ defineTest(qtConfReport_jumboBuild) {
     qtConfReportPadded($${1}, $$mergeLimit)
 }
 
-defineTest(qtConfTest_detectPython3) {
-    python = $$qtConfFindInPath("python3$$EXE_SUFFIX")
+defineTest(qtConfTest_detectPython2) {
+    python = $$qtConfFindInPath("python2$$EXE_SUFFIX")
     isEmpty(python) {
-        qtLog("'python3$$EXE_SUFFIX' not found in PATH. Checking for 'python$$EXE_SUFFIX'.")
+        qtLog("'python2$$EXE_SUFFIX' not found in PATH. Checking for 'python$$EXE_SUFFIX'.")
         python = $$qtConfFindInPath("python$$EXE_SUFFIX")
     }
     isEmpty(python) {
         qtLog("'python$$EXE_SUFFIX' not found in PATH. Giving up.")
         return(false)
     }
+    !isPythonVersionSupported($$python) {
+        qtLog("A suitable Python 2 executable could not be located.")
+        return(false)
+    }
 
-    # Make tests.python3.location available in configure.json.
+    # Make tests.python2.location available in configure.json.
     $${1}.location = $$clean_path($$python)
     export($${1}.location)
     $${1}.cache += location
@@ -437,6 +458,10 @@ defineTest(qtwebengine_isMacOsPlatformSupported) {
     }
     !qtwebengine_isMinOSXSDKVersion(10, 13): {
         qtwebengine_platformError("requires a macOS SDK version of 10.13 or newer. Current version is $${WEBENGINE_OSX_SDK_PRODUCT_VERSION}.")
+        return(false)
+    }
+    CONFIG(debug, debug|release):isUniversal(){
+        qtwebengine_platformError("Universal builds can not be done with debug configuration due to large binary size.")
         return(false)
     }
     return(true)

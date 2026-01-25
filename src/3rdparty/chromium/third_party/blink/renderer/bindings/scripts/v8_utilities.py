@@ -271,7 +271,7 @@ EXPOSED_WORKERS = set([
 ])
 
 
-class ExposureSet(object):
+class ExposureSet:
     """An ExposureSet is a collection of Exposure instructions."""
 
     def __init__(self, exposures=None):

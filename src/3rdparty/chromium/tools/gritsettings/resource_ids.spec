@@ -499,6 +499,12 @@
   "content/shell/shell_resources.grd": {
     "includes": [2940],
   },
+
+  # This file is generated during the build.
+  "<(SHARED_INTERMEDIATE_DIR)/content/browser/tracing/tracing_resources.grd": {
+    "META": {"sizes": {"includes": [20],}},
+    "includes": [2960],
+  },
   # END content/ section.
 
   # START ios/web/ section.

@@ -9,7 +9,7 @@
 #include "base/logging.h"
 #include "base/strings/string_split_internal.h"
 #include "base/strings/string_util.h"
-#include <unicode/utf.h>
+#include "base/third_party/icu/icu_utf.h"
 
 namespace base {
 
