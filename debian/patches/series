@@ -26,5 +26,6 @@ ffmpeg-x86-optimization.patch
 fix-example-pro-files.patch
 build-with-c++17.patch
 python3.12-imp.patch
+python3.12-six.patch
 
 icu74.patch
