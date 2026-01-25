@@ -25,5 +25,6 @@ pipewire-0.3.patch
 ffmpeg-x86-optimization.patch
 fix-example-pro-files.patch
 build-with-c++17.patch
+python3.12-imp.patch
 
 icu74.patch
