@@ -27,5 +27,6 @@ fix-example-pro-files.patch
 build-with-c++17.patch
 python3.12-imp.patch
 python3.12-six.patch
+python3.13-pipes.patch
 
 icu74.patch
