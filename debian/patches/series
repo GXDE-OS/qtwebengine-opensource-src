@@ -24,5 +24,6 @@ disable-catapult.patch
 pipewire-0.3.patch
 ffmpeg-x86-optimization.patch
 fix-example-pro-files.patch
+build-with-c++17.patch
 
 icu74.patch
