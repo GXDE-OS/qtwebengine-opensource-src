@@ -30,3 +30,9 @@ python3.12-six.patch
 python3.13-pipes.patch
 
 icu74.patch
+
+# Arch Support
+0001-Port-for-loongarch64.patch
+add-riscv64-support.patch
+# Fix GXDE Building Problem
+fix-re2-stringpiece.patch

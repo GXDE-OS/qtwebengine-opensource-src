@@ -85,7 +85,8 @@ Build-Depends: binutils (>= 2.32-8~),
                ruby,
                xauth,
                xvfb,
-               yui-compressor
+               yui-compressor,
+               python3-zombie-imp
 Build-Depends-Indep: qdoc-qt5 (>= 5.15.7~) <!nodoc>,
                      qhelpgenerator-qt5 (>= 5.15.7~) <!nodoc>,
                      qtattributionsscanner-qt5 (>= 5.15.7~) <!nodoc>,
